@@ -1,5 +1,9 @@
 'use client'
 
+import Principal from '../components/principal'
+
 export default function Default() {
-    return(<h1>Default</h1>);
+    return(
+        <Principal/>
+    );
 }
