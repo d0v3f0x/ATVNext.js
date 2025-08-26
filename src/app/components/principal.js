@@ -1,10 +1,13 @@
 import React from 'react';
 import Default from '../default/page';
+import { Texto4 } from '../components/parametro'
 
 function Index () {  // Função nomeada
     return(
         <div>
-            <h1>Pagina principal 1</h1>
+            <h1>
+               <Texto4 cor='blue'>Pagina principal 1</Texto4> 
+            </h1>
         </div>
     )
 }

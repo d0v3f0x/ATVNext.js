@@ -35,3 +35,11 @@ export function Texto3({ children, cor, tipo }) {
         </div>
     )
 }
+
+export function Texto4({ children, cor }) {
+    return (
+        <span style={{ color: cor }}>
+            {children}
+        </span>
+    )
+}
