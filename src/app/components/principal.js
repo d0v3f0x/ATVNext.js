@@ -1,14 +1,14 @@
 import React from 'react';
 import Default from '../default/page';
 
-// function Index () {  // Função nomeada
-//     return(
-//         <div>
-//             <h1>Pagina principal 1</h1>
-//         </div>
-//     )
-// }
-// export default Index;
+function Index () {  // Função nomeada
+    return(
+        <div>
+            <h1>Pagina principal 1</h1>
+        </div>
+    )
+}
+export default Index;
 
 // const Index = function () {  //Função anônima
 //     return (
@@ -45,8 +45,8 @@ import Default from '../default/page';
 
 // export default () => <div><h1>Pagina principal 6</h1></div> //Arrow function em uma linha
 
-export default () => {  //Arrow function exportando diretamente multi-linhas
-    <div>
-        <h1>Pagina principal 7</h1>
-    </div>
-}
+// export default () => {  //Arrow function exportando diretamente multi-linhas
+//     <div>
+//         <h1>Pagina principal 7</h1>
+//     </div>
+// } 
