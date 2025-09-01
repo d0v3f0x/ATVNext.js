@@ -1,6 +1,25 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie'; // Codigo para instalar a biblioteca:   npm i js-cookie
+
 export default function Login() {
+  const router = useRouter();
+  const expirationDate = new Date(1000);
+
+  console.log(expirationDate)
+
+  const hadleSubmit = async (e) => {
+    e.preventDefault();
+
+    Cookies.set('authToken', 'dfjhkdfjhksfdskjh', {
+      expires: expirationDate,
+      secure: true,
+      sameSite: 'strict'
+    });
+    router.push('/default');
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -10,7 +29,7 @@ export default function Login() {
             Login
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={hadleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="loginuser" className="sr-only">Usuário</label>

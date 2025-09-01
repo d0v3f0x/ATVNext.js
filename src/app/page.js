@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(
     () => {
-      const token = 'djkfhkjfjdasfhkdjfhkajdhasjkh';
+      const token = localStorage.getItem('authToken');
       if (token) 
         router.push('/default');
       else
