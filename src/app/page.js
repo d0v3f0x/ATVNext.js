@@ -8,6 +8,7 @@ export default function Home() {
   useEffect(
     () => {
       const token = localStorage.getItem('authToken');
+      console.log('Token: ', token);
       if (token) 
         router.push('/default');
       else
