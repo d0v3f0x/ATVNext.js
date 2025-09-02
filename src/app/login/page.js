@@ -6,21 +6,22 @@ import Cookies from 'js-cookie'; // Codigo para instalar a biblioteca:   npm i j
 
 export default function Login() {
   const router = useRouter();
-  const expirationDate = new Date(100000);
-  const { token } = "{'login':'marcio.cezar'}";
+  const token = "{'login':'marcio.cezar'}";
 
-  console.log(expirationDate)
-
-  const hadleSubmit = (e) => {
+  const hadleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      Cookies.set('authToken', token, {
+        expires: 7,
+        secure: true,
+        sameSite: 'strict'
+      });
 
-    Cookies.set('authToken', token, {
-      expires: expirationDate,
-      secure: true,
-      sameSite: 'strict'
-    });
-
-    router.push('/default');
+      console.log(token);
+      router.push('/default');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
