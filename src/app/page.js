@@ -17,6 +17,23 @@ export default function Home() {
 
     },[router]
   );
-
+  const [error, setError] = useState('');
+  const handleSubmit = async (e) => {
+   e.preventDefault();
+   const formData = new FormData(e.target);
+   const username = formData.get('loginuser');
+   const password = formData.get('password');
+   
+   // Validação básica (substituir por API real)
+   if (username === 'admin' && password === 'admin123') {
+   // Sucesso - continuar com o código existente
+   setError('');
+   Cookies.set('authToken', token, { ... });
+   router.push('/default');
+   } else {
+   setError('Credenciais inválidas. Tente novamente.');
+   }
+  };
+  
   //return null;
 }

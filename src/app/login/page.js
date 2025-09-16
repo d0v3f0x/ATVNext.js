@@ -2,25 +2,35 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie'; // Codigo para instalar a biblioteca:   npm i js-cookie
+import Cookies from 'js-cookie'; // npm i js-cookie
 
 export default function Login() {
   const router = useRouter();
-  const token = "{'login':'marcio.cezar'}";
+  const [error, setError] = useState(''); // Estado para exibir erro
+  const [remember, setRemember] = useState(false); // Estado para "Lembrar usuário"
 
-  const hadleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    const formData = new FormData(e.target);
+    const username = formData.get('loginuser');
+    const password = formData.get('password');
+
+    // 🔹 Validação de credenciais
+    if (username === 'admin' && password === 'admin123') {
+      setError('');
+      const token = JSON.stringify({ login: username });
+
+      // 🔹 Se "lembrar" for marcado, expira em 7 dias. Senão, expira ao fechar navegador
       Cookies.set('authToken', token, {
-        expires: 7,
+        expires: remember ? 7 : undefined,
         secure: true,
         sameSite: 'strict'
       });
 
-      console.log(token);
+      console.log("Login bem-sucedido:", token);
       router.push('/default');
-    } catch (error) {
-      console.log(error);
+    } else {
+      setError('Credenciais inválidas. Tente novamente.');
     }
   };
 
@@ -32,7 +42,7 @@ export default function Login() {
             Login
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={hadleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="loginuser" className="sr-only">Usuário</label>
@@ -60,6 +70,24 @@ export default function Login() {
               />
             </div>
           </div>
+
+          {/* 🔹 Checkbox "Lembrar usuário" */}
+          <div className="flex items-center">
+            <input
+              id="remember"
+              name="remember"
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            />
+            <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">
+              Lembrar usuário
+            </label>
+          </div>
+
+          {/* 🔹 Mensagem de erro */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <div>
             <button
